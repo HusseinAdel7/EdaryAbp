@@ -1,4 +1,4 @@
-using Edary.Entities.JournalEntries;
+﻿using Edary.Entities.JournalEntries;
 using Edary.Entities.SubAccounts;
 using Edary.Consts.JournalEntries;
 using Microsoft.EntityFrameworkCore;
@@ -14,18 +14,29 @@ namespace Edary.EntityFrameworkCore.EntitiesConfigurations.JournalEntries
 
             builder.HasKey(x => x.Id);
 
+            builder.Property(x => x.Id)
+                   .HasMaxLength(36)
+                   .IsRequired();
+
             builder.Property(x => x.Description)
-                .HasMaxLength(JournalEntryDetailConsts.MaxDescriptionLength);
+                   .HasMaxLength(JournalEntryDetailConsts.MaxDescriptionLength)
+                   .IsRequired();
 
             builder.Property(x => x.Debit).IsRequired();
             builder.Property(x => x.Credit).IsRequired();
 
-            // JournalEntryDetail -> SubAccount
-            builder.HasOne<SubAccount>()
-                .WithMany()
-                .HasForeignKey(x => x.SubAccountId)
-                .OnDelete(DeleteBehavior.Restrict);
+            // ✅ JournalEntryDetail -> JournalEntry (Required)
+            builder.HasOne(x => x.JournalEntry)
+                   .WithMany(x => x.JournalEntryDetails)
+                   .HasForeignKey(x => x.JournalEntryId)
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Cascade);
+
+            // ✅ JournalEntryDetail -> SubAccount (Optional)
+            builder.HasOne(x => x.SubAccount)
+                   .WithMany()
+                   .HasForeignKey(x => x.SubAccountId)
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
-

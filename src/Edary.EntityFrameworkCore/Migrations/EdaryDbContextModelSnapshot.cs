@@ -19,7 +19,7 @@ namespace Edary.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.SqlServer)
-                .HasAnnotation("ProductVersion", "10.0.0")
+                .HasAnnotation("ProductVersion", "10.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -450,11 +450,6 @@ namespace Edary.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2")
                         .HasColumnName("CreationTime");
@@ -515,7 +510,8 @@ namespace Edary.Migrations
             modelBuilder.Entity("Edary.Entities.JournalEntries.JournalEntryDetail", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2")
@@ -551,6 +547,7 @@ namespace Edary.Migrations
                         .HasColumnName("IsDeleted");
 
                     b.Property<string>("JournalEntryId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -564,10 +561,6 @@ namespace Edary.Migrations
                     b.Property<string>("SubAccountId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("SubAccountId1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<Guid?>("TenantId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId");
@@ -577,8 +570,6 @@ namespace Edary.Migrations
                     b.HasIndex("JournalEntryId");
 
                     b.HasIndex("SubAccountId");
-
-                    b.HasIndex("SubAccountId1");
 
                     b.ToTable("JournalEntryDetails", "JournalEntries");
                 });
@@ -2917,18 +2908,13 @@ namespace Edary.Migrations
                     b.HasOne("Edary.Entities.JournalEntries.JournalEntry", "JournalEntry")
                         .WithMany("JournalEntryDetails")
                         .HasForeignKey("JournalEntryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Edary.Entities.SubAccounts.SubAccount", null)
-                        .WithMany()
-                        .HasForeignKey("SubAccountId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Edary.Entities.SubAccounts.SubAccount", "SubAccount")
                         .WithMany()
-                        .HasForeignKey("SubAccountId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SubAccountId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("JournalEntry");
 

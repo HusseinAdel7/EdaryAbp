@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Edary.Migrations
 {
     /// <inheritdoc />
-    public partial class AddingDBEntities : Migration
+    public partial class AddindEntitiesToDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -74,7 +74,6 @@ namespace Edary.Migrations
                     Currency = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     ExchangeRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CurrencyEn = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -239,13 +238,12 @@ namespace Edary.Migrations
                 schema: "JournalEntries",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    JournalEntryId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    JournalEntryId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     SubAccountId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Debit = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Credit = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    SubAccountId1 = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -272,13 +270,6 @@ namespace Edary.Migrations
                         principalTable: "SubAccounts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_JournalEntryDetails_SubAccounts_SubAccountId1",
-                        column: x => x.SubAccountId1,
-                        principalSchema: "Accounts",
-                        principalTable: "SubAccounts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -533,12 +524,6 @@ namespace Edary.Migrations
                 schema: "JournalEntries",
                 table: "JournalEntryDetails",
                 column: "SubAccountId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_JournalEntryDetails_SubAccountId1",
-                schema: "JournalEntries",
-                table: "JournalEntryDetails",
-                column: "SubAccountId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MainAccounts_AccountNumber",

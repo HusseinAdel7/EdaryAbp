@@ -22,8 +22,7 @@ namespace Edary.EntityFrameworkCore.EntitiesConfigurations.JournalEntries
             builder.Property(x => x.Notes)
                 .HasMaxLength(JournalEntryConsts.MaxNotesLength);
 
-            builder.Property(x => x.CreatedBy)
-                .HasMaxLength(JournalEntryConsts.MaxCreatedByLength);
+      
 
             builder.Property(x => x.CurrencyEn)
                 .HasMaxLength(JournalEntryConsts.MaxCurrencyEnLength);
