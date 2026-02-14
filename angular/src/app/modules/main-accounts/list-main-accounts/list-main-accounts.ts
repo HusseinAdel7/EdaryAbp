@@ -17,16 +17,29 @@ import { LocalizationPipe } from '@abp/ng.core';
 export class ListMainAccounts implements OnInit {
   accounts: MainAccountDto[] = [];
   input: MainAccountPagedRequestDto = { maxResultCount: 10, skipCount: 0 };
-  constructor(private mainAccountService: MainAccountService) {
 
+  constructor(private mainAccountService: MainAccountService) {}
 
-  }
   ngOnInit(): void {
     this.loadMainAccounts();
   }
-  loadMainAccounts() {
+
+  loadMainAccounts(): void {
     this.mainAccountService.getList(this.input).subscribe(result => {
-      this.accounts = result.items;
-    })
+      this.accounts = result.items ?? [];
+    });
+  }
+
+  trackById(_index: number, item: MainAccountDto): string {
+    return item.id ?? '';
+  }
+
+  deleteAccount(account: MainAccountDto): void {
+    if (!account?.id) return;
+    if (!confirm('Are you sure you want to delete this account?')) return;
+    this.mainAccountService.delete(account.id).subscribe({
+      next: () => this.loadMainAccounts(),
+      error: (err) => console.error(err)
+    });
   }
 }

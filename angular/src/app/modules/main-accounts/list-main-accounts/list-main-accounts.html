@@ -15,6 +15,7 @@
           <th>{{ 'MainAccount::TransferredTo' | abpLocalization }}</th>
           <th>{{ 'MainAccount::Status' | abpLocalization }}</th>
           <th>{{ 'MainAccount::CreatedDate' | abpLocalization }}</th>
+          <th>{{ 'MainAccount::Actions' | abpLocalization }}</th>
         </tr>
       </thead>
 
@@ -36,6 +37,14 @@
             <td data-label="Created Date">
               {{ account.creationTime | date:'medium' }}
             </td>
+            <td data-label="Actions" class="actions-cell">
+              <a [routerLink]="['/main-accounts/edit', account.id]" class="btn btn-sm btn-outline-primary me-1">
+                {{ 'MainAccount::Update' | abpLocalization }}
+              </a>
+              <button type="button" class="btn btn-sm btn-outline-danger" (click)="deleteAccount(account)">
+                {{ 'MainAccount::Delete' | abpLocalization }}
+              </button>
+            </td>
           </tr>
 
           <ng-container *ngIf="account.children?.length > 0">
@@ -54,6 +63,14 @@
               </td>
               <td data-label="Created Date">
                 {{ child.creationTime | date:'medium' }}
+              </td>
+              <td data-label="Actions" class="actions-cell">
+                <a [routerLink]="['/main-accounts/edit', child.id]" class="btn btn-sm btn-outline-primary me-1">
+                  {{ 'MainAccount::Update' | abpLocalization }}
+                </a>
+                <button type="button" class="btn btn-sm btn-outline-danger" (click)="deleteAccount(child)">
+                  {{ 'MainAccount::Delete' | abpLocalization }}
+                </button>
               </td>
             </tr>
           </ng-container>

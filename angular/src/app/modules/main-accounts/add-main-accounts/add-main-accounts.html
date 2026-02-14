@@ -1,7 +1,7 @@
 <div class="card shadow-sm">
   <div class="card-header">
     <h4 class="card-title mb-0">
-      Create Main Account
+      {{ editingId ? ('MainAccount::UpdateMainAccount' | abpLocalization) : ('MainAccount::CreateMainAccount' | abpLocalization) }}
     </h4>
   </div>
 

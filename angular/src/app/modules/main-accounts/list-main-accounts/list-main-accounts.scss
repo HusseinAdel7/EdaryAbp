@@ -111,6 +111,14 @@
   }
 }
 
+.actions-cell {
+  white-space: nowrap;
+
+  .btn {
+    min-width: 4rem;
+  }
+}
+
 .alert {
   background: #fff3cd;
   color: #856404;
