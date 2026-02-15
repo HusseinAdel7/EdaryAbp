@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Edary.Application.Contracts\Edary.Application.Contracts.csproj" />
     <ProjectReference Include="..\Edary.Domain.Shared\Edary.Domain.Shared.csproj" />
   </ItemGroup>
 

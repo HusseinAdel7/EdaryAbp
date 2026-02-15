@@ -70,7 +70,7 @@ namespace Edary.AppServices.Suppliers
             await base.DeleteAsync(id);
         }
 
-        [Authorize(EdaryPermissions.Suppliers.Create)]
+        //[Authorize(EdaryPermissions.Suppliers.Create)]
         public override async Task<SupplierDto> CreateAsync(CreateSupplierDto input)
         {
             if (string.IsNullOrWhiteSpace(input.SupplierName))

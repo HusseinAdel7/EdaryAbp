@@ -20,7 +20,7 @@ using Volo.Abp.Validation;
 
 namespace Edary.AppServices.JournalEntries
 {
-    [Authorize(EdaryPermissions.JournalEntries.Default)]
+   // [Authorize(EdaryPermissions.JournalEntries.Default)]
     public class JournalEntryAppService : 
         CrudAppService<JournalEntry, JournalEntryDto, string, GetJournalEntryListInput, CreateJournalEntryDto, UpdateJournalEntryDto>, 
         IJournalEntryAppService
@@ -54,7 +54,7 @@ namespace Edary.AppServices.JournalEntries
             return ObjectMapper.Map<JournalEntry, JournalEntryDto>(journalEntry.FirstOrDefault(x => x.Id == id));
         }
 
-        [Authorize(EdaryPermissions.JournalEntries.List)]
+       // [Authorize(EdaryPermissions.JournalEntries.List)]
         public override async Task<PagedResultDto<JournalEntryDto>> GetListAsync(GetJournalEntryListInput input)
         {
             var query = await _journalEntryRepository.WithDetailsAsync(x => x.JournalEntryDetails);
@@ -80,7 +80,7 @@ namespace Edary.AppServices.JournalEntries
             return new PagedResultDto<JournalEntryDto>(totalCount, ObjectMapper.Map<List<JournalEntry>, List<JournalEntryDto>>(journalEntries));
         }
 
-        [Authorize(EdaryPermissions.JournalEntries.Create)]
+       // [Authorize(EdaryPermissions.JournalEntries.Create)]
         public override async Task<JournalEntryDto> CreateAsync(CreateJournalEntryDto input)
         {
             ValidateJournalEntryHeader(input.Currency, input.ExchangeRate);
@@ -114,7 +114,7 @@ namespace Edary.AppServices.JournalEntries
             return ObjectMapper.Map<JournalEntry, JournalEntryDto>(journalEntry);
         }
 
-        [Authorize(EdaryPermissions.JournalEntries.Update)]
+    //    [Authorize(EdaryPermissions.JournalEntries.Update)]
         public override async Task<JournalEntryDto> UpdateAsync(string id, UpdateJournalEntryDto input)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -168,7 +168,7 @@ namespace Edary.AppServices.JournalEntries
             return ObjectMapper.Map<JournalEntry, JournalEntryDto>(journalEntry);
         }
 
-        [Authorize(EdaryPermissions.JournalEntries.Delete)]
+      //  [Authorize(EdaryPermissions.JournalEntries.Delete)]
         public override async Task DeleteAsync(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
