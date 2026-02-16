@@ -17,7 +17,7 @@ using Volo.Abp.Validation;
 
 namespace Edary.AppServices.SubAccounts
 {
-    [Authorize(EdaryPermissions.SubAccounts.Default)]
+    //[Authorize(EdaryPermissions.SubAccounts.Default)]
     public class SubAccountAppService
     : CrudAppService<
         SubAccount,
@@ -126,7 +126,7 @@ namespace Edary.AppServices.SubAccounts
             return MapToGetOutputDto(createdAccount);
         }
 
-        [Authorize(EdaryPermissions.SubAccounts.Update)]
+       // [Authorize(EdaryPermissions.SubAccounts.Update)]
         public override async Task<SubAccountDto> UpdateAsync(string id, UpdateSubAccountDto input)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -215,7 +215,7 @@ namespace Edary.AppServices.SubAccounts
             return MapToGetOutputDto(updatedAccount);
         }
 
-        [Authorize(EdaryPermissions.SubAccounts.List)]
+       // [Authorize(EdaryPermissions.SubAccounts.List)]
         public override async Task<PagedResultDto<SubAccountDto>> GetListAsync(SubAccountPagedRequestDto input)
         {
             var query = await Repository.GetQueryableAsync();

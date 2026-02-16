@@ -22,7 +22,7 @@ using Volo.Abp.Validation;
 
 namespace Edary.AppServices.Invoices
 {
-    [Authorize(EdaryPermissions.Invoices.Default)]
+    //[Authorize(EdaryPermissions.Invoices.Default)]
     public class InvoiceAppService :
         CrudAppService<
             Invoice,
@@ -67,7 +67,7 @@ namespace Edary.AppServices.Invoices
             return ObjectMapper.Map<Invoice, InvoiceDto>(invoice);
         }
 
-        [Authorize(EdaryPermissions.Invoices.List)]
+        //[Authorize(EdaryPermissions.Invoices.List)]
         public override async Task<PagedResultDto<InvoiceDto>> GetListAsync(InvoicePagedRequestDto input)
         {
             var query = await Repository.WithDetailsAsync(x => x.InvoiceDetails);
@@ -97,7 +97,7 @@ namespace Edary.AppServices.Invoices
                 ObjectMapper.Map<List<Invoice>, List<InvoiceDto>>(invoices));
         }
 
-        [Authorize(EdaryPermissions.Invoices.Create)]
+        //[Authorize(EdaryPermissions.Invoices.Create)]
         public override async Task<InvoiceDto> CreateAsync(CreateInvoiceDto input)
         {
             await ValidateInvoiceHeaderAsync(input.WarehouseId, input.SupplierId, input.TotalAmount, input.Discount, input.TaxAmount);
@@ -152,7 +152,7 @@ namespace Edary.AppServices.Invoices
             return ObjectMapper.Map<Invoice, InvoiceDto>(created);
         }
 
-        [Authorize(EdaryPermissions.Invoices.Update)]
+        //[Authorize(EdaryPermissions.Invoices.Update)]
         public override async Task<InvoiceDto> UpdateAsync(string id, UpdateInvoiceDto input)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -218,7 +218,7 @@ namespace Edary.AppServices.Invoices
             return ObjectMapper.Map<Invoice, InvoiceDto>(updated);
         }
 
-        [Authorize(EdaryPermissions.Invoices.Delete)]
+        //[Authorize(EdaryPermissions.Invoices.Delete)]
         public override async Task DeleteAsync(string id)
         {
             if (string.IsNullOrWhiteSpace(id))

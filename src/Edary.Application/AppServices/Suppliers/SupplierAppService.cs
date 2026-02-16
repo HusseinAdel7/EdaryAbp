@@ -19,7 +19,7 @@ using Volo.Abp.Validation;
 
 namespace Edary.AppServices.Suppliers
 {
-    [Authorize(EdaryPermissions.Suppliers.Default)]
+    //[Authorize(EdaryPermissions.Suppliers.Default)]
     public class SupplierAppService :
         CrudAppService<
             Supplier,
@@ -126,7 +126,7 @@ namespace Edary.AppServices.Suppliers
             return MapToGetOutputDto(created);
         }
 
-        [Authorize(EdaryPermissions.Suppliers.Update)]
+        //[Authorize(EdaryPermissions.Suppliers.Update)]
         public override async Task<SupplierDto> UpdateAsync(string id, UpdateSupplierDto input)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -149,7 +149,7 @@ namespace Edary.AppServices.Suppliers
             return MapToGetOutputDto(updated);
         }
 
-        [Authorize(EdaryPermissions.Suppliers.List)]
+        //[Authorize(EdaryPermissions.Suppliers.List)]
         public override async Task<PagedResultDto<SupplierDto>> GetListAsync(SupplierPagedRequestDto input)
         {
             var query = await Repository.GetQueryableAsync();

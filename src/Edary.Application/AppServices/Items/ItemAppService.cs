@@ -17,7 +17,7 @@ using Volo.Abp.Validation;
 
 namespace Edary.AppServices.Items
 {
-    [Authorize(EdaryPermissions.Items.Default)]
+    //[Authorize(EdaryPermissions.Items.Default)]
     public class ItemAppService :
         CrudAppService<
             Item,
@@ -53,7 +53,7 @@ namespace Edary.AppServices.Items
             return ObjectMapper.Map<Item, ItemDto>(item);
         }
 
-        [Authorize(EdaryPermissions.Items.List)]
+       // [Authorize(EdaryPermissions.Items.List)]
         public override async Task<PagedResultDto<ItemDto>> GetListAsync(ItemPagedRequestDto input)
         {
             var query = await _itemRepository.GetQueryableAsync();
@@ -95,7 +95,7 @@ namespace Edary.AppServices.Items
             return new PagedResultDto<ItemDto>(totalCount, dtos);
         }
 
-        [Authorize(EdaryPermissions.Items.Create)]
+        //[Authorize(EdaryPermissions.Items.Create)]
         public override async Task<ItemDto> CreateAsync(CreateItemDto input)
         {
             ValidateItemInput(input.ItemName, input.OpeningPrice, input.MinLimit, input.MaxLimit, input.ReorderQty);
@@ -148,7 +148,7 @@ namespace Edary.AppServices.Items
             return ObjectMapper.Map<Item, ItemDto>(created);
         }
 
-        [Authorize(EdaryPermissions.Items.Update)]
+        //[Authorize(EdaryPermissions.Items.Update)]
         public override async Task<ItemDto> UpdateAsync(string id, UpdateItemDto input)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -230,7 +230,7 @@ namespace Edary.AppServices.Items
             return ObjectMapper.Map<Item, ItemDto>(item);
         }
 
-        [Authorize(EdaryPermissions.Items.Delete)]
+        //[Authorize(EdaryPermissions.Items.Delete)]
         public override async Task DeleteAsync(string id)
         {
             if (string.IsNullOrWhiteSpace(id))

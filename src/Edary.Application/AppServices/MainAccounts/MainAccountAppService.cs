@@ -18,7 +18,7 @@ using Volo.Abp.Validation;
 
 namespace Edary.AppServices.MainAccounts
 {
-    [Authorize(EdaryPermissions.MainAccounts.Default)]
+    //[Authorize(EdaryPermissions.MainAccounts.Default)]
     public class MainAccountAppService
     : CrudAppService<
         MainAccount,
@@ -52,7 +52,7 @@ namespace Edary.AppServices.MainAccounts
             return await base.GetAsync(id);
         }
 
-        [Authorize(EdaryPermissions.MainAccounts.Delete)]
+        //[Authorize(EdaryPermissions.MainAccounts.Delete)]
         public override async Task DeleteAsync(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -87,7 +87,7 @@ namespace Edary.AppServices.MainAccounts
             return MapToGetOutputDto(createdAccount);
         }
 
-        [Authorize(EdaryPermissions.MainAccounts.Update)]
+        //[Authorize(EdaryPermissions.MainAccounts.Update)]
         public override async Task<MainAccountDto> UpdateAsync(string id, UpdateMainAccountDto input)
         {
             var mainAccount = await Repository.GetAsync(id);
@@ -109,7 +109,7 @@ namespace Edary.AppServices.MainAccounts
             return MapToGetOutputDto(updatedAccount);
         }
 
-        [Authorize(EdaryPermissions.MainAccounts.List)]
+        //[Authorize(EdaryPermissions.MainAccounts.List)]
         public override async Task<PagedResultDto<MainAccountDto>> GetListAsync(MainAccountPagedRequestDto input)
         {
             var query = await Repository.GetQueryableAsync();
