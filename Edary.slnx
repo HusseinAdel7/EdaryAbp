@@ -1,23 +1,23 @@
 <Solution>
-    <Configurations>
-        <Platform Name="Any CPU" />
-    </Configurations>
+    <Folder Name="/Solution Items/">
+        <File Path="Dockerfile.txt" />
+    </Folder>
     <Folder Name="/src/">
-        <Project Path="src/Edary.Domain/Edary.Domain.csproj" />
-        <Project Path="src/Edary.Application/Edary.Application.csproj" />
-        <Project Path="src/Edary.EntityFrameworkCore/Edary.EntityFrameworkCore.csproj" />
-        <Project Path="src/Edary.Domain.Shared/Edary.Domain.Shared.csproj" />
         <Project Path="src/Edary.Application.Contracts/Edary.Application.Contracts.csproj" />
-        <Project Path="src/Edary.HttpApi/Edary.HttpApi.csproj" />
-        <Project Path="src/Edary.HttpApi.Client/Edary.HttpApi.Client.csproj" />
+        <Project Path="src/Edary.Application/Edary.Application.csproj" />
         <Project Path="src/Edary.DbMigrator/Edary.DbMigrator.csproj" />
+        <Project Path="src/Edary.Domain.Shared/Edary.Domain.Shared.csproj" />
+        <Project Path="src/Edary.Domain/Edary.Domain.csproj" />
+        <Project Path="src/Edary.EntityFrameworkCore/Edary.EntityFrameworkCore.csproj" />
+        <Project Path="src/Edary.HttpApi.Client/Edary.HttpApi.Client.csproj" />
         <Project Path="src/Edary.HttpApi.Host/Edary.HttpApi.Host.csproj" />
+        <Project Path="src/Edary.HttpApi/Edary.HttpApi.csproj" />
     </Folder>
     <Folder Name="/test/">
         <Project Path="test/Edary.Application.Tests/Edary.Application.Tests.csproj" />
-        <Project Path="test/Edary.EntityFrameworkCore.Tests/Edary.EntityFrameworkCore.Tests.csproj" />
-        <Project Path="test/Edary.TestBase/Edary.TestBase.csproj" />
         <Project Path="test/Edary.Domain.Tests/Edary.Domain.Tests.csproj" />
+        <Project Path="test/Edary.EntityFrameworkCore.Tests/Edary.EntityFrameworkCore.Tests.csproj" />
         <Project Path="test/Edary.HttpApi.Client.ConsoleTestApp/Edary.HttpApi.Client.ConsoleTestApp.csproj" />
+        <Project Path="test/Edary.TestBase/Edary.TestBase.csproj" />
     </Folder>
 </Solution>
