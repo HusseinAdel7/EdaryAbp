@@ -58,6 +58,7 @@ public class EdaryHttpApiHostModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
+        var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
 
         PreConfigure<OpenIddictBuilder>(builder =>
@@ -70,18 +71,22 @@ public class EdaryHttpApiHostModule : AbpModule
             });
         });
 
-        PreConfigure<AbpOpenIddictAspNetCoreOptions>(options =>
+        if (!hostingEnvironment.IsDevelopment())
         {
-            options.AddDevelopmentEncryptionAndSigningCertificate = false;
-        });
+            PreConfigure<AbpOpenIddictAspNetCoreOptions>(options =>
+            {
+                options.AddDevelopmentEncryptionAndSigningCertificate = false;
+            });
 
-        PreConfigure<OpenIddictServerBuilder>(serverBuilder =>
-        {
-            serverBuilder.AddEphemeralEncryptionKey()
-                         .AddEphemeralSigningKey();
+            PreConfigure<OpenIddictServerBuilder>(serverBuilder =>
+            {
+                serverBuilder.AddEphemeralEncryptionKey()
+                             .AddEphemeralSigningKey();
 
-            serverBuilder.SetIssuer(new Uri(configuration["AuthServer:Authority"]!));
-        });
+                serverBuilder.SetIssuer(new Uri(configuration["AuthServer:Authority"]!));
+            });
+        }
+
     }
 
     public override void ConfigureServices(ServiceConfigurationContext context)
