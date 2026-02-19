@@ -20,7 +20,7 @@ public class Program
 
         try
         {
-            Log.Information("Starting Edary.HttpApi.Host.");
+            Log.Information("🔥🔥🔥 NEW BUILD 2026 🔥🔥🔥");
             var builder = WebApplication.CreateBuilder(args);
 
             // 🔥 مهم جدًا للـ Railway
